@@ -3,17 +3,12 @@ Build Instructions
 
 The requirements to build are:
 
-  * llvm 3.5+ (for clang)
+* make, gcc, autoconf, probably more
 
-Building the Binutils
+Building the Toolchain
 ---------------------
 
-We will need to build the following in order to cross-compile:
+We will need to build a significant toolchain in order to compile.
+The following command should just work (TM):
 
-  * binutils 2.25.1
-
-To do so:
-
-  1. Get the binutils source at:
-     http://gnu.mirror.iweb.com/binutils/binutils-2.25.1.tar.bz2
-  2. 
+$ ./setup.sh gcc xorriso grub

@@ -21,6 +21,7 @@ WhereAmI
 Resources
 ---------
 
+* https://git.uwaterloo.ca/mkarsten/KOS
 * http://os.phil-opp.com/multiboot-kernel.html
 * http://wiki.osdev.org/Creating_a_64-bit_kernel
 * http://wiki.osdev.org/LLVM_Cross-Compiler
@@ -32,7 +33,7 @@ Resources
 Attribution
 -----------
 
-Some of this code comes from osdev.org, this is limited to:
+Some of this code comes from existing sources, this is limited to:
 
 from http://wiki.osdev.org/Creating_a_64-bit_kernel#link.ld
 * link.ld
@@ -41,3 +42,6 @@ from http://os.phil-opp.com/multiboot-kernel.html
 * bootstrap.ld
 * multiboot_header.asm
 * boot.asm
+
+from https://git.uwaterloo.ca/mkarsten/KOS
+* some of setup.sh
