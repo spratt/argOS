@@ -1,10 +1,11 @@
 #!/bin/bash
+######################################################################
+# Configuration
 
 BINUTILS=http://gnu.mirror.iweb.com/binutils/binutils-2.25.1.tar.bz2
 GCC=http://gnu.mirror.iweb.com/gcc/gcc-5.2.0/gcc-5.2.0.tar.bz2
 #GRUB=ftp://ftp.gnu.org/gnu/grub/grub-2.00.tar.gz          # stable
 GRUB=http://alpha.gnu.org/gnu/grub/grub-2.02~beta3.tar.gz  # beta
-#XORRISO=http://scdbackup.sourceforge.net/xorriso-1.4.2.tar.gz
 XORRISO=ftp://gnu.mirror.iweb.com/xorriso/xorriso-1.4.0.tar.gz
 MPC=ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
 GMP=https://gmplib.org/download/gmp/gmp-6.1.0.tar.xz
@@ -20,6 +21,9 @@ ARCHIVES=$TOPLEVEL/archives
 PACKAGES=$TOPLEVEL/packages
 # Cross is where we install
 CROSS=$TOPLEVEL/cross
+
+######################################################################
+# Edit below at your own peril!
 
 FILES="$BINUTILS $GCC $GRUB $XORRISO $MPC $GMP $MPFR $NEWLIB"
 
@@ -79,8 +83,10 @@ function build_gcc() {
 
     rm -rf $GCC_BLD && mkdir $GCC_BLD && cd $GCC_BLD
     $GCC_SRC/configure --target=$TARGET -prefix=$CROSS --enable-languages=c \
-                       --disable-nls --disable-tls --disable-shared --disable-libssp --disable-libgomp \
-                       --disable-multilib --disable-decimal-float --disable-threads --disable-libmudflap \
+                       --disable-nls --disable-tls --disable-shared \
+                       --disable-libssp --disable-libgomp --disable-multilib \
+                       --disable-decimal-float --disable-threads \
+                       --disable-libmudflap \
                        --with-newlib || error "$GCC_DIR configure"
     make && make install || error "$GCC_DIR make"
 }
@@ -95,7 +101,6 @@ function build_xorriso() {
 
     cd $PACKAGES
     rm -rf $XORRISO_DIR && tar xf $ARCHIVES/$XORRISO_BN && cd $XORRISO_DIR
-    #./configure --build=$TARGET --target=$TARGET --prefix=$CROSS || error "$XORRISO_DIR configure"
     ./configure --prefix=$CROSS || error "$XORRISO_DIR configure"
     make && make install || error "$XORRISO_DIR make"    
 }
@@ -112,12 +117,14 @@ function build_grub() {
     tar xf $ARCHIVES/$GRUB_BN --strip-components 1
 
     rm -rf $GRUB_BLD && mkdir $GRUB_BLD && cd $GRUB_BLD
-	# $GRUB_SRC/configure --target=$TARGET --prefix=$CROSS --disable-werror \
-	# --disable-device-mapper || error "$GRUB_DIR configure"
-    $GRUB_SRC/configure --build=$TARGET --target=$TARGET --prefix=$CROSS --disable-werror --disable-device-mapper \
-                        TARGET_CC=$CROSS/bin/x86_64-elf-gcc TARGET_OBJCOPY=$CROSS/bin/x86_64-elf-objcopy \
-                        TARGET_STRIP=$CROSS/bin/x86_64-elf-strip TARGET_NM=$CROSS/bin/x86_64-elf-nm \
-                        TARGET_RANLIB=$CROSS/binx86_64-elf-ranlib || error "$GRUB_DIR configure"
+    $GRUB_SRC/configure --build=$TARGET --target=$TARGET --prefix=$CROSS \
+                        --disable-werror --disable-device-mapper \
+                        TARGET_CC=$CROSS/bin/x86_64-elf-gcc \
+                        TARGET_OBJCOPY=$CROSS/bin/x86_64-elf-objcopy \
+                        TARGET_STRIP=$CROSS/bin/x86_64-elf-strip \
+                        TARGET_NM=$CROSS/bin/x86_64-elf-nm \
+                        TARGET_RANLIB=$CROSS/binx86_64-elf-ranlib \
+        || error "$GRUB_DIR configure"
     make && make install || error "$GRUB_DIR make"
 }
 
