@@ -6,6 +6,7 @@ MPC=ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
 GMP=https://gmplib.org/download/gmp/gmp-6.1.0.tar.xz
 MPFR=http://www.mpfr.org/mpfr-current/mpfr-3.1.4.tar.xz
 NEWLIB=ftp://sourceware.org/pub/newlib/newlib-2.2.0.20150623.tar.gz
+TARGET=x86_64-elf
 
 TOPLEVEL=$PWD
 ARCHIVES=$TOPLEVEL/archives
@@ -34,25 +35,6 @@ for FILE in $FILES; do
     fi
 done
 
-# header "Extraction"
-# cd $TOPLEVEL/packages
-# for FILE in $(ls $TOPLEVEL/archives); do
-#     DIR="${FILE%.*.*}"
-#     if [ ! -d "$TOPLEVEL/packages/$DIR" ]; then
-#         echo Extracting $FILE...
-#         tar xf $TOPLEVEL/archives/$FILE
-#     fi
-# done
-
-# BINUTILS ######################################################################
-
-# BU_BN=$(basename $BINUTILS)
-# BU_DIR="${BU_BN%.*.*}"
-# header "Building $BU_DIR"
-# cd $TOPLEVEL/packages/$BU_DIR
-# ./configure --target=x86_64-elf -prefix=$TOPLEVEL/cross --disable-nls --disable-werror
-# make && make install
-
 # GCC ###########################################################################
 
 GCC_BN=$(basename $GCC)
@@ -71,10 +53,6 @@ GMP_DIR="${GMP_BN%.*.*}"
 GMP_DIR2="${GMP_DIR%-*}"
 MPFR_DIR="${MPFR_BN%.*.*}"
 MPFR_DIR2="${MPFR_DIR%-*}"
-# cd $TOPLEVEL/packages/$GCC_DIR
-# mv -v ../$MPC_DIR ./$MPC_DIR2
-# mv -v ../$GMP_DIR ./$GMP_DIR2
-# mv -v ../$MPFR_DIR ./$MPFR_DIR2
 
 GCC_SRC=$PACKAGES/gcc-src
 GCC_BLD=$PACKAGES/gcc-build
@@ -89,7 +67,7 @@ tar xf $ARCHIVES/$MPFR_BN && mv $MPFR_DIR $MPFR_DIR2
 tar xf $ARCHIVES/$GCC_BN --strip-components 1
 
 rm -rf $GCC_BLD && mkdir $GCC_BLD && cd $GCC_BLD
-$GCC_SRC/configure --target=x86_64-elf -prefix=$TOPLEVEL/cross --enable-languages=c \
+$GCC_SRC/configure --target=$TARGET -prefix=$TOPLEVEL/cross --enable-languages=c \
                    --disable-nls --disable-tls --disable-shared --disable-libssp --disable-libgomp \
                    --disable-multilib --disable-decimal-float --disable-threads --disable-libmudflap \
                    --with-newlib

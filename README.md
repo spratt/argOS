@@ -34,6 +34,10 @@ Attribution
 
 Some of this code comes from osdev.org, this is limited to:
 
-* link.ld - from http://wiki.osdev.org/Creating_a_64-bit_kernel#link.ld
-* multiboot_header.asm - from http://os.phil-opp.com/multiboot-kernel.html
+from http://wiki.osdev.org/Creating_a_64-bit_kernel#link.ld
+* link.ld
 
+from http://os.phil-opp.com/multiboot-kernel.html
+* bootstrap.ld
+* multiboot_header.asm
+* boot.asm
