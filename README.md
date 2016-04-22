@@ -14,17 +14,31 @@ WhereAmI
 --------
 
 * [X] Successfully cross-compile elf64 kernel
-* [ ] Setup 32-bit multiboot bootstrap
+* [X] Setup 32-bit multiboot bootstrap
+* [ ] Call custom code
 * [ ] ???
 * [ ] Profit
 
 Resources
 ---------
 
-* https://git.uwaterloo.ca/mkarsten/KOS
+Phil Opp got me started:
+
 * http://os.phil-opp.com/multiboot-kernel.html
+
+I took a course with Prof Karsten, who wrote an experimental kernel
+from which I stole some configuration:
+
+* https://git.uwaterloo.ca/mkarsten/KOS
+
+Of course, osdev.org provided so many resources:
+
 * http://wiki.osdev.org/Creating_a_64-bit_kernel
 * http://wiki.osdev.org/LLVM_Cross-Compiler
+* http://wiki.osdev.org/GRUB_2
+
+And I found a bunch of miscellaneous resources on the way:
+
 * https://www.linux.com/blog/cross-compiling-arm
 * http://clang.llvm.org/docs/CrossCompilation.html
 * https://falstaff.agner.ch/2015/03/03/cross-compile-linux-for-arm-using-llvmclang-on-arch-linux/
