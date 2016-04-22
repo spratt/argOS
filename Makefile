@@ -12,18 +12,18 @@ GRUBMKR = $(CROSS)/bin/grub-mkrescue
 
 .PHONY: clean all
 
-all: kernel kernel.bin os.iso
+all: kernel isofiles/boot/kernel.bin os.iso
 
 kernel: kernel.o
 
 os.iso: isofiles
 	$(GRUBMKR) --xorriso=$(PWD)/$(XORRISO) -o $@ $<
 
-kernel.bin: multiboot_header.o boot.o
+isofiles/boot/kernel.bin: multiboot_header.o boot.o
 	$(LD) -n -o $@ -T bootstrap.ld $^
 
 clean:
-	rm -f kernel.bin kernel multiboot_header os.iso *.o
+	rm -f isofiles/boot/kernel.bin kernel multiboot_header os.iso *.o
 
 # Make the implicit explicit
 %.o : %.asm
