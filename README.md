@@ -10,14 +10,19 @@ For license information, see the LICENSE file.
 
 For contributor information, see the CONTRIBUTORS file.
 
+
 WhereAmI
 --------
 
 * [X] Successfully cross-compile elf64 kernel
 * [X] Setup 32-bit multiboot bootstrap
+* [X] Fully automate build process
+* [X] Separate src and bin
 * [ ] Call custom code
+* [ ] Switch to long mode
 * [ ] ???
 * [ ] Profit
+
 
 Resources
 ---------
