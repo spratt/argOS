@@ -4,7 +4,15 @@ argOS
 This is a really generic Operating System (argOS), which is intended
 to be a playground in which to write operating system code.
 
-For build instructions, see the BUILD.md file.
+The minimal build/run process is:
+
+'''bash
+$ ./setup.sh gcc xorriso grub
+$ make
+$ make qemu
+'''
+
+For detailed build instructions, see the BUILD.md file.
 
 For license information, see the LICENSE file.
 
