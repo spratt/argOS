@@ -6,11 +6,11 @@ to be a playground in which to write operating system code.
 
 The minimal build/run process is:
 
-'''bash
+```bash
 $ ./setup.sh gcc xorriso grub
 $ make
 $ make qemu
-'''
+```
 
 For detailed build instructions, see the BUILD.md file.
 
