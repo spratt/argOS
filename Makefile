@@ -22,6 +22,7 @@ LDPRE    = -ffreestanding -T link.ld
 LDPOST   = -nostdlib -lgcc
 XORRISO  = $(CROSS)/bin/xorriso
 GRUBMKR  = $(CROSS)/bin/grub-mkrescue
+QEMU	 = qemu-system-x86_64
 
 ######################################################################
 # Edit past here at your own risk!
@@ -30,7 +31,7 @@ GRUBMKR  = $(CROSS)/bin/grub-mkrescue
 all: $(kernel) $(iso)
 
 qemu: $(iso)
-	qemu-system-x86_64 -cdrom $(iso)
+	$(QEMU) $(QEMUFLAGS) -cdrom $(iso)
 
 clean:
 	@rm -r $(build)
